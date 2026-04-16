@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>South Africa Countdown</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    text-align: center;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),
+                url('https://images.unsplash.com/photo-1549880181-56a44cf4a9a0?q=80&w=1600') no-repeat center/cover;
+  }
+
+  .container {
+    background: rgba(0,0,0,0.55);
+    padding: 40px 50px;
+    border-radius: 20px;
+    z-index: 2;
+  }
+
+  h1 { font-size: 2.8em; margin: 0; }
+  h2 { margin: 10px 0 30px; color: #f4c542; }
+
+  #countdown {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .box {
+    background: #111;
+    border-radius: 12px;
+    padding: 20px;
+    width: 120px;
+    border-top: 4px solid #007847;
+  }
+
+  .box:nth-child(2) { border-top-color: #ffb612; }
+  .box:nth-child(3) { border-top-color: #de3831; }
+  .box:nth-child(4) { border-top-color: #002395; }
+
+  .value { font-size: 2em; font-weight: bold; }
+  .label { font-size: 0.8em; opacity: 0.8; }
+
+  .footer { margin-top: 20px; }
+
+  /* Animal animation */
+  .animals {
+    position: absolute;
+    bottom: 10px;
+    font-size: 40px;
+    white-space: nowrap;
+    animation: walk 25s linear infinite;
+  }
+
+  @keyframes walk {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100vw); }
+  }
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>🇿🇦 South Africa</h1>
+  <h2>Holiday Countdown</h2>
+
+  <div id="countdown">
+    <div class="box"><div class="value" id="days"></div><div class="label">DAYS</div></div>
+    <div class="box"><div class="value" id="hours"></div><div class="label">HOURS</div></div>
+    <div class="box"><div class="value" id="minutes"></div><div class="label">MINUTES</div></div>
+    <div class="box"><div class="value" id="seconds"></div><div class="label">SECONDS</div></div>
+  </div>
+
+  <div class="footer">Time to pack, braai & explore 🐾</div>
+</div>
+
+<!-- Animals -->
+<div class="animals">
+  🐘 🦒 🦁 🐆 🦓 🐃
+</div>
+
+<script>
+  const targetDate = new Date("March 27, 2027 00:00:00").getTime();
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+
+    if (diff <= 0) {
+      document.getElementById("countdown").innerHTML = "You're there!";
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("days").innerText = days;
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("minutes").innerText = minutes;
+    document.getElementById("seconds").innerText = seconds;
+  }
+
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+</script>
+
+</body>
+</html>
